@@ -5,7 +5,7 @@ description = ""
 authors = ["Frederick Wagner <frederick@frederickwagner.net>"]
 
 [tool.poetry.dependencies]
-python = "^3.9.0"
+python = "3.9.0"
 mintotp = "^0.3.0"
 fastapi = "^0.68.1"
 
