@@ -8,11 +8,11 @@ authors = ["Frederick Wagner <frederick@frederickwagner.net>"]
 python = "3.9.0"
 mintotp = "^0.3.0"
 fastapi = "^0.68.1"
+uvicorn = "^0.15.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 ipython = "^7.27.0"
-uvicorn = "^0.15.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
