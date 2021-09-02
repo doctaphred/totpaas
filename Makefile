@@ -1,7 +1,7 @@
 default: lint test runserver
 
 lint:
-	flake8 totpaas
+	flake8
 
 test:
 	pytest
