@@ -6,41 +6,32 @@ from fastapi import FastAPI, HTTPException
 from mintotp import hotp  # type: ignore
 
 
-def totp(key, time, *, time_step, digits, digest):
+def totp(time, *, key, time_step, digits, digest):
     counter = int(time / time_step)
     return hotp(key, counter, digits, digest)
 
 
 class TotpResource:
 
-    def __init__(self, keys, *, clock=time.time):
-        self.keys = keys
+    def __init__(self, params, *, clock=time.time):
+        self.params = params
         self.clock = clock
-
-    def params(self):
-        return dict(
-            digits=6,
-            time_step=30,
-            digest='sha1',
-            time=self.clock(),
-        )
 
     def __call__(self, name: str):
         try:
-            key = self.keys[name]
+            params = self.params[name]
         except KeyError:
             raise HTTPException(status_code=404)
 
-        # TODO: URL params?
-        params = self.params()
-        value = totp(key, **params)
+        time = self.clock()
         return {
             'name': name,
-            **params,
-            'value': value,
+            'time': time,
+            'value': totp(time=time, **params),
         }
 
 
-keys = json.loads(os.environ['TOTP_KEYS'])
+params = json.loads(os.environ['TOTP_PARAMS'])
+# TODO: Validate params.
 app = FastAPI()
-app.get("/{name}")(TotpResource(keys))
+app.get("/{name}")(TotpResource(params))
