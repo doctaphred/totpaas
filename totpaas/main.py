@@ -3,7 +3,7 @@ import os
 import time
 
 from fastapi import FastAPI, HTTPException
-from mintotp import hotp
+from mintotp import hotp  # type: ignore
 
 
 def totp(key, time, *, time_step, digits, digest):

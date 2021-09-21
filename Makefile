@@ -2,6 +2,7 @@ default: lint test runserver
 
 lint:
 	flake8
+	mypy .
 
 test:
 	pytest
