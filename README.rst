@@ -10,9 +10,7 @@ Deployed at https://totpaas.herokuapp.com/
 Setup
 =====
 
-You'll need to provide the ``TOTP_PARAMS`` environment variable [1]_.
-
-.. [1] Consider using [direnv](https://direnv.net/) for this purpose.
+You'll need to provide the ``TOTP_PARAMS`` environment variable [#]_.
 
 Example value::
 
@@ -25,6 +23,9 @@ Example value::
         }
     }
 
-Afterward, run ``poetry shell``, then ``make`` [2]_.
+Afterward, run ``poetry shell``, then ``make`` [#]_.
 
-.. [2] Remember not to actually do any of this.
+----
+
+.. [#] Consider using [direnv](https://direnv.net/) for this purpose.
+.. [#] Remember not to actually do any of this.
