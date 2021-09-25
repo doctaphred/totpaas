@@ -59,4 +59,4 @@ params = json.loads(os.environ['TOTP_PARAMS'])
 resource = TotpResource.from_b32_params(params)
 
 app = FastAPI()
-app.get("/{name}")(resource)
+app.add_api_route("/{name}", resource)
