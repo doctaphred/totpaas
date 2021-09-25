@@ -12,7 +12,7 @@ class TotpResource:
     >>> from itertools import count
     >>> clock = count(28).__next__
     >>> params = {'ayy': {'key': 'lmao'}}
-    >>> resource = TotpResource.from_params(params, clock=clock)
+    >>> resource = TotpResource.from_b32_params(params, clock=clock)
 
     >>> resource('ayy')
     {'name': 'ayy', 'time': 28, 'code': '602398'}
@@ -34,7 +34,7 @@ class TotpResource:
         self.clock = clock
 
     @classmethod
-    def from_params(cls, params, **kwargs):
+    def from_b32_params(cls, params, **kwargs):
         generators = {
             name: OTPGenerator.from_b32(**kwargs)
             for name, kwargs in params.items()
@@ -56,7 +56,7 @@ class TotpResource:
 
 
 params = json.loads(os.environ['TOTP_PARAMS'])
-resource = TotpResource.from_params(params)
+resource = TotpResource.from_b32_params(params)
 
 app = FastAPI()
 app.get("/{name}")(resource)
