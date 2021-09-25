@@ -180,14 +180,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "mintotp"
-version = "0.3.0"
-description = "MinTOTP - Minimal TOTP Generator"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "more-itertools"
 version = "8.10.0"
 description = "More routines for operating on iterables, beyond itertools"
@@ -434,7 +426,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.0"
-content-hash = "6e6eb4a6f361a812e2472558878221bc110c774ddb5193e77847e778c9454f93"
+content-hash = "e63ecfac8bb5b726034073e0edb901246ca66aed208620344a6280189273ca28"
 
 [metadata.files]
 appnope = [
@@ -496,10 +488,6 @@ matplotlib-inline = [
 mccabe = [
     {file = "mccabe-0.6.1-py2.py3-none-any.whl", hash = "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"},
     {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
-]
-mintotp = [
-    {file = "mintotp-0.3.0-py3-none-any.whl", hash = "sha256:eadee8531d9ee95eda92fd17949137454acd1d2a001dcf68f99bb8de56f06468"},
-    {file = "mintotp-0.3.0.tar.gz", hash = "sha256:d0f4db5edb38a7481120176a526e8c29539b9e80581dd2dcc1811557d77cfad5"},
 ]
 more-itertools = [
     {file = "more-itertools-8.10.0.tar.gz", hash = "sha256:1debcabeb1df793814859d64a81ad7cb10504c24349368ccf214c664c474f41f"},

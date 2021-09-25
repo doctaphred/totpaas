@@ -3,12 +3,8 @@ import os
 import time
 
 from fastapi import FastAPI, HTTPException
-from mintotp import hotp  # type: ignore
 
-
-def totp(time, *, key, time_step, digits, digest):
-    counter = int(time / time_step)
-    return hotp(key, counter, digits, digest)
+from .totp import OTPGenerator
 
 
 class TotpResource:
@@ -23,11 +19,12 @@ class TotpResource:
         except KeyError:
             raise HTTPException(status_code=404)
 
+        totp = OTPGenerator.from_b32(**params)
         time = self.clock()
         return {
             'name': name,
             'time': time,
-            'value': totp(time=time, **params),
+            'code': totp(time),
         }
 
 
