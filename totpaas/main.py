@@ -20,7 +20,7 @@ class TotpResource:
     >>> resource('lmao')
     Traceback (most recent call last):
       ...
-    fastapi.exceptions.HTTPException
+    fastapi.exceptions.HTTPException: 404
 
     >>> resource('ayy')
     {'name': 'ayy', 'time': 29, 'code': '602398'}
@@ -45,7 +45,7 @@ class TotpResource:
         try:
             totp = self.generators[name]
         except KeyError as exc:
-            raise HTTPException(status_code=404) from exc
+            raise HTTPException(404) from exc
 
         time = self.clock()
         return {
