@@ -8,6 +8,26 @@ from .totp import OTPGenerator
 
 
 class TotpResource:
+    """
+    >>> from itertools import count
+    >>> clock = count(28).__next__
+    >>> params = {'ayy': {'key': 'lmao'}}
+    >>> resource = TotpResource.from_params(params, clock=clock)
+
+    >>> resource('ayy')
+    {'name': 'ayy', 'time': 28, 'code': '602398'}
+
+    >>> resource('lmao')
+    Traceback (most recent call last):
+      ...
+    fastapi.exceptions.HTTPException
+
+    >>> resource('ayy')
+    {'name': 'ayy', 'time': 29, 'code': '602398'}
+
+    >>> resource('ayy')
+    {'name': 'ayy', 'time': 30, 'code': '567113'}
+    """
 
     def __init__(self, generators, *, clock=time.time):
         self.generators = generators
@@ -24,8 +44,8 @@ class TotpResource:
     def __call__(self, name: str):
         try:
             totp = self.generators[name]
-        except KeyError:
-            raise HTTPException(status_code=404)
+        except KeyError as exc:
+            raise HTTPException(status_code=404) from exc
 
         time = self.clock()
         return {
