@@ -27,5 +27,5 @@ Afterward, run ``poetry shell``, then ``make`` [#]_.
 
 ----
 
-.. [#] Consider using [direnv](https://direnv.net/) for this purpose.
+.. [#] Consider using `direnv <https://direnv.net/>`_ for this purpose.
 .. [#] Remember not to actually do any of this.
