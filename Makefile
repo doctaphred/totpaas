@@ -1,8 +1,8 @@
 default: lint test runserver
 
 lint:
-	flake8
-	mypy .
+	flake8 src tests
+	mypy src tests
 
 test:
 	pytest
