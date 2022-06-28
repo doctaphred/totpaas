@@ -1,4 +1,4 @@
-default: lint test runserver
+default: lint test open dev
 
 lint:
 	flake8 src tests
@@ -7,10 +7,15 @@ lint:
 test:
 	pytest
 
-runserver:
-	# Export the RUNSERVER_OPEN_PATH env var if desired:
+open:
+	# Export the MAKE_OPEN_PATH env var if desired:
 	# otherwise, the root path `/` will be opened.
-	-open http://localhost:8000${RUNSERVER_OPEN_PATH}
+	open http://localhost:8000${MAKE_OPEN_PATH}
+
+dev:
 	uvicorn totpaas.app:from_environ --factory --reload
 
-.PHONY: default lint test runserver
+prod:
+	uvicorn totpaas.app:from_environ --factory --host 0.0.0.0
+
+.PHONY: default lint test open dev prod
