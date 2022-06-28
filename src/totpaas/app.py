@@ -1,15 +1,19 @@
 import json
 import os
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 
 from .resources import TotpResource
 
 
 def from_environ(environ=os.environ):
-    params = json.loads(environ['TOTP_PARAMS'])
-    resource = TotpResource.from_b32_params(params)
+    return from_params(json.loads(environ['TOTP_PARAMS']))
 
+
+def from_params(params):
     app = FastAPI()
-    app.add_api_route("/{name}", resource)
+    # Add a basic health check endpoint.
+    app.add_api_route('/ok', lambda: 'ok', response_class=Response)
+    # Add the TOTP endpoint.
+    app.add_api_route('/totp/{name}', TotpResource.from_b32_params(params))
     return app
