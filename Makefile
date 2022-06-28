@@ -9,6 +9,6 @@ test:
 
 runserver:
 	-open http://localhost:8000
-	uvicorn totpaas.main:app --reload
+	uvicorn totpaas.app:from_environ --factory --reload
 
 .PHONY: default lint test runserver
