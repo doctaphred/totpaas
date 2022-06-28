@@ -1,4 +1,4 @@
-default: lint test open dev
+default: lint test open start
 
 lint:
 	flake8 src tests
@@ -12,10 +12,13 @@ open:
 	# otherwise, the root path `/` will be opened.
 	open http://localhost:8000${MAKE_OPEN_PATH}
 
-dev:
+start:
 	uvicorn totpaas.app:from_environ --factory --reload
 
-prod:
+prod-build:
+	poetry install --no-dev
+
+prod-start:
 	uvicorn totpaas.app:from_environ --factory --host 0.0.0.0
 
-.PHONY: default lint test open dev prod
+.PHONY: default lint test open start prod-build prod-start
