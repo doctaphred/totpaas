@@ -20,6 +20,9 @@ class OTPGenerator:
     >>> totp(31)
     '812658'
 
+    >>> totp(38378250)
+    '123456'
+
     >>> OTPGenerator(b'', time_step=60).totp(60)
     '812658'
 
