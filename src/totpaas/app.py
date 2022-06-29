@@ -14,7 +14,7 @@ def from_params(params):
     app = FastAPI()
 
     # Add a basic health check endpoint.
-    app.add_api_route('/ok', lambda: 'ok', response_class=Response)
+    app.add_api_route('/ok', lambda: Response('ok'))
 
     # Add the TOTP endpoints.
     for name, kwargs in params.items():
