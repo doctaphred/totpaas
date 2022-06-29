@@ -12,8 +12,13 @@ def from_environ(environ=os.environ):
 
 def from_params(params):
     app = FastAPI()
+
     # Add a basic health check endpoint.
     app.add_api_route('/ok', lambda: 'ok', response_class=Response)
-    # Add the TOTP endpoint.
-    app.add_api_route('/totp/{name}', TotpResource.from_b32_params(params))
+
+    # Add the TOTP endpoints.
+    for name, kwargs in params.items():
+        endpoint = TotpResource.from_b32(**kwargs)
+        app.add_api_route(f'/totp/{name}', endpoint)
+
     return app

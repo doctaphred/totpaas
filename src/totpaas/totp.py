@@ -10,7 +10,7 @@ class OTPGenerator:
     See https://datatracker.ietf.org/doc/html/rfc4226
     See https://datatracker.ietf.org/doc/html/rfc6238
 
-    >>> totp = OTPGenerator(b'')
+    >>> totp = OTPGenerator(b'').totp
     >>> totp(0)
     '328482'
     >>> totp(29)
@@ -100,14 +100,12 @@ class OTPGenerator:
         >>> just_started = nextafter(0, 1)
         >>> almost_there = nextafter(30, 0)
 
-        >>> totp = OTPGenerator(b'')
+        >>> totp = OTPGenerator(b'').totp
         >>> assert totp(0) == totp(just_started) == totp(almost_there)
         >>> assert totp(almost_there) != totp(30)
 
-        >>> totp2 = OTPGenerator(b'', time_step=60)
+        >>> totp2 = OTPGenerator(b'', time_step=60).totp
         >>> assert totp(0) == totp2(0) == totp2(30)
         >>> assert totp(30) == totp2(60)
         """
         return self.hotp(self.counter(time))
-
-    __call__ = totp
